@@ -2,11 +2,13 @@ package org.example;
 
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Locale;
 
+@Slf4j
 public class AppiumManager {
 
     private static AppiumDriverLocalService service;
@@ -36,16 +38,16 @@ public class AppiumManager {
         service.start();
 
         if (service.isRunning()) {
-            System.out.println("Appium server started at: " + service.getUrl());
+            log.info("Appium server started at: " + service.getUrl());
         } else {
-            System.out.println("Failed to start Appium server.");
+            log.info("Failed to start Appium server.");
         }
     }
 
     /**
      * Stops the Appium server if it is currently running.
      * <p>
-     * This method safely shuts down the server started with {@link #startServer()}.
+     * This method safely shuts down the server started with {@link #startAppiumServer(String, int)}.
      * It's recommended to call this method in test cleanup or teardown logic to
      * release system resources.
      * </p>
@@ -53,7 +55,7 @@ public class AppiumManager {
     public static void stopServer() {
         if (service != null) {
             service.stop();
-            System.out.println("Appium server stopped.");
+            log.info("Appium server stopped.");
         }
     }
 
