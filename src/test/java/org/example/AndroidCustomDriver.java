@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.net.PortProber;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class AndroidCustomDriver extends AppiumManager {
 
     private static final String SERVER_IP = "127.0.0.1";
-    private static final int PORT = 4723;
+    private static final int PORT = PortProber.findFreePort();
     public static final String APP_FILE_NAME = "ApiDemos-debug.apk";
     private static AndroidDriver driver;
 
@@ -97,7 +98,6 @@ public class AndroidCustomDriver extends AppiumManager {
 
         return deviceList;
     }
-
 
     @AfterClass
     public static void tearDown() {
